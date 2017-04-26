@@ -2,15 +2,11 @@ package com.moe.tasklist;
 
 import com.moe.tasklist.domain.Checklist;
 import com.moe.tasklist.domain.Item;
-import com.moe.tasklist.repository.ChecklistRepository;
 import com.moe.tasklist.service.ChecklistService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.math.BigDecimal;
-import java.util.*;
 
 @SpringBootApplication
 public class TasksApplication {

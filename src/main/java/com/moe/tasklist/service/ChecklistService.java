@@ -3,7 +3,6 @@ package com.moe.tasklist.service;
 import com.moe.tasklist.domain.Checklist;
 import com.moe.tasklist.domain.Item;
 import com.moe.tasklist.repository.ChecklistRepository;
-import com.moe.tasklist.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +46,12 @@ public class ChecklistService {
         checklistRepository.delete(id);
     }
 
+    /**
+     * This function links a give checklist with its items. It seems necessary because otherwise items
+     * don't have their foreign key set to be their owning checklist. This only seems to be a problem when
+     * items are coming in via a nested JSON structure such as when testing with Postman.
+     * @param checklist the Checklist to which the items should be linked.
+     */
     private void linkItemsToChecklist(Checklist checklist) {
         for (Item item : checklist.getItems()) {
             checklist.addItem(item);
