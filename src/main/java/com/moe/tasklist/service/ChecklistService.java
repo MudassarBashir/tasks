@@ -1,7 +1,9 @@
 package com.moe.tasklist.service;
 
 import com.moe.tasklist.domain.Checklist;
+import com.moe.tasklist.domain.Item;
 import com.moe.tasklist.repository.ChecklistRepository;
+import com.moe.tasklist.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ public class ChecklistService {
     }
     
     public void createChecklist(Checklist checklist) {
+        linkItemsToChecklist(checklist);
         checklistRepository.save(checklist);
     }
 
@@ -36,10 +39,17 @@ public class ChecklistService {
         }
         Checklist checkListToUpdate = possibleChecklist.get();
         checkListToUpdate = checklist;
+        linkItemsToChecklist(checkListToUpdate);
         checklistRepository.save(checkListToUpdate);
     }
 
     public void deleteChecklist(Long id) {
         checklistRepository.delete(id);
+    }
+
+    private void linkItemsToChecklist(Checklist checklist) {
+        for (Item item : checklist.getItems()) {
+            checklist.addItem(item);
+        }
     }
 }

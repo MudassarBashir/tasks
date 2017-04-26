@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A class representing a task checklist.
@@ -22,4 +24,19 @@ public class Checklist {
     @Column(unique = true)
     @NotNull
     private String name;
+
+    /**
+     * Items belonging to this checklist.
+     */
+    @OneToMany(mappedBy = "checklist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Item> items = new HashSet<>();
+
+    public void addItem(Item item) {
+        item.setChecklist(this);
+        getItems().add(item);
+    }
+
+    public void removeItem(Item item) {
+        getItems().remove(item);
+    }
 }
