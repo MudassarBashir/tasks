@@ -29,4 +29,9 @@ public class ChecklistController {
         return checklist;
     }
 
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public void updateChecklist( @PathVariable("id") String id, @RequestBody Checklist checklist) throws Exception {
+        checklistService.updateChecklist(Long.parseLong(id), checklist);
+    }
+
 }

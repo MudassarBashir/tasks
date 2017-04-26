@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 
@@ -25,5 +26,16 @@ public class ChecklistService {
     
     public void createChecklist(Checklist checklist) {
         checklistRepository.save(checklist);
+    }
+
+    public void updateChecklist(Long id, Checklist checklist) throws Exception {
+        Optional<Checklist> possibleChecklist = Optional.ofNullable(checklistRepository.findOne(id));
+        if (!possibleChecklist.isPresent()) {
+            log.error("Checklist sought for update not found.");
+            throw new Exception("No such checklist to update.");
+        }
+        Checklist checkListToUpdate = possibleChecklist.get();
+        checkListToUpdate = checklist;
+        checklistRepository.save(checkListToUpdate);
     }
 }

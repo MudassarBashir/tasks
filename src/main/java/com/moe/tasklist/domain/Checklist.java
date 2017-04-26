@@ -19,7 +19,7 @@ public class Checklist {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(unique=true)
+    @Column(unique = true)
     @NotNull
     private String name;
 }
