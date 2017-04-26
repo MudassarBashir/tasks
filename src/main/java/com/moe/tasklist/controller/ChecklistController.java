@@ -34,4 +34,9 @@ public class ChecklistController {
         checklistService.updateChecklist(Long.parseLong(id), checklist);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteChecklist(@PathVariable("id") Long id) {
+        checklistService.deleteChecklist(id);
+    }
+
 }

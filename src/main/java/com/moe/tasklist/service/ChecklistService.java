@@ -38,4 +38,8 @@ public class ChecklistService {
         checkListToUpdate = checklist;
         checklistRepository.save(checkListToUpdate);
     }
+
+    public void deleteChecklist(Long id) {
+        checklistRepository.delete(id);
+    }
 }
